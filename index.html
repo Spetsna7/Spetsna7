@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z Спецназ V</title>
+    <link rel="icon" href="spetsnaz.svg" type="image/svg+xml">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <iframe id="mainFrame" src="beta.html"></iframe>
+
+    <script>
+        // Daftar halaman yang akan diputar secara berurutan
+        const pages = ["beta.html", "beta2.html"];
+        let currentPageIndex = 0;
+        const iframe = document.getElementById('mainFrame');
+
+        // Mendengarkan pesan dari file di dalam iframe
+        window.addEventListener("message", function(event) {
+            if (event.data === "nextVideo") {
+                // Update index ke halaman berikutnya (dan kembali ke awal jika sudah habis)
+                currentPageIndex = (currentPageIndex + 1) % pages.length;
+                
+                // Ganti sumber iframe ke halaman selanjutnya
+                iframe.src = pages[currentPageIndex];
+                console.log("Beralih ke: " + pages[currentPageIndex]);
+            }
+        });
+    </script>
+</body>
+</html>
